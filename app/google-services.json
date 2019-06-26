@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "51464155587",
+    "firebase_url": "https://chatapp-865f4.firebaseio.com",
+    "project_id": "chatapp-865f4",
+    "storage_bucket": "chatapp-865f4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:51464155587:android:004e2dd9cb55478e",
+        "android_client_info": {
+          "package_name": "com.infosys.crystal.breathingwellness"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "51464155587-7roj1coshbn15173751eoi2a54fm39b0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPbjuMjlve_F8O5viwU6LvcVrYQPOKEqA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "51464155587-7roj1coshbn15173751eoi2a54fm39b0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "51464155587-a7u1utt8a7elh2gqi1s9jdu3674ljoh0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.infosys.crystal.breathingwellness"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
