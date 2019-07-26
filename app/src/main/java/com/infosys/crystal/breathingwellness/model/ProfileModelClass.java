@@ -17,6 +17,7 @@ public class ProfileModelClass {
         this.about_us = about_us;
         this.phone = phone;
 
+
     }
 
     public String getImage() {

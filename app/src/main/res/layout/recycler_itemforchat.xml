@@ -17,25 +17,19 @@
         android:orientation="horizontal">
 
 
-
-
-
-
-
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/proimage"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:src="@drawable/profile"
-        app:civ_border_width="2dp"
-        app:civ_border_color="#dede" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/pimage"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:src="@drawable/profile"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#dede" />
 
 
 
         <TextView
             android:layout_marginTop="10dp"
-            android:id="@+id/uname"
+            android:id="@+id/usernamee"
             android:fontFamily="@font/aclonica"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -45,16 +39,6 @@
             android:textStyle="bold">
 
         </TextView>
-
-        <xyz.hanks.library.bang.SmallBangView
-            android:id="@+id/like_heart"
-            android:layout_width="56dp"
-            android:layout_height="56dp">
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </xyz.hanks.library.bang.SmallBangView>
 
 
 
@@ -71,10 +55,10 @@
 
         <TextView
             android:fontFamily="@font/aclonica"
-            android:id="@+id/about"
+            android:id="@+id/messages"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="About"
+            android:hint="Message"
             android:layout_marginLeft="90dp"
             android:layout_marginTop="40dp"
             android:textSize="11sp"/>

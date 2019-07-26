@@ -13,9 +13,9 @@ public class GroupModel {
     public String phone;
     public String id;
 
-//    public GroupModel() {
-//
-//    }
+    public GroupModel() {
+
+    }
 
     public GroupModel(String image, String user_name, String about_us, String phone, String id) {
 

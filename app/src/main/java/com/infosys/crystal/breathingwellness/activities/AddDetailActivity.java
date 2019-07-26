@@ -83,6 +83,7 @@ public class AddDetailActivity extends AppCompatActivity {
         // Firestore initialization
 
         db = FirebaseFirestore.getInstance();
+        String id;
 
 
         /*
@@ -155,31 +156,29 @@ public class AddDetailActivity extends AppCompatActivity {
     function to update user detail
      */
 
-    private void writeUserDetail(String userId, String name, String image, String about, String phone) {
+    private void writeUserDetail(String UserId, String name, String image, String about, String phone) {
         ProfileModelClass user = new ProfileModelClass(image, name, about, phone);
 
-        userDatabase.child("userDetail").child(userId).setValue(user);
+        userDatabase.child("userDetail").child(UserId).setValue(user);
 
 
 
-        CollectionReference dbusers = db.collection("userDetail");
+       CollectionReference dbusers = db.collection("userDetail");
         //DocumentReference dbu = dbusers.document(userId);
 
         dbusers.add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
-
                 Toast.makeText(AddDetailActivity.this,"Saved",Toast.LENGTH_LONG).show();
-
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
 
                 Toast.makeText(AddDetailActivity.this,e.getMessage(),Toast.LENGTH_LONG).show();
-
             }
         });
+
 
     }
 

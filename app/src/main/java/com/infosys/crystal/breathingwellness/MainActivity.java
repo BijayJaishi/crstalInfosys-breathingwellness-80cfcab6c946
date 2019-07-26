@@ -1,6 +1,5 @@
 package com.infosys.crystal.breathingwellness;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -10,13 +9,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,39 +19,26 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.ScaleAnimation;
-import android.widget.Button;
-import android.widget.RelativeLayout;
-import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.auth.IdpResponse;
-import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.infosys.crystal.breathingwellness.activities.AddDetailActivity;
+import com.infosys.crystal.breathingwellness.activities.Chating_activity;
+import com.infosys.crystal.breathingwellness.activities.Groupcreate;
 import com.infosys.crystal.breathingwellness.activities.ProfileActivity;
 import com.infosys.crystal.breathingwellness.adapter.TabAdapter;
 import com.infosys.crystal.breathingwellness.model.ProfileModelClass;
-import com.infosys.crystal.breathingwellness.model.UserSignInCheck;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.Inflater;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -68,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     CoordinatorLayout activity_main;
     TabAdapter tabAdapter;
     FloatingActionButton fab;
-    private DatabaseReference mdataBase;
+
 
      Groupcreate.GroupuserRecyclerAdapter groupuserRecyclerAdapter;
 
@@ -84,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
     int[] iconIntArray = {R.drawable.ic_message_black_24dp,R.drawable.ic_group_add_black_24dp,R.drawable.ic_phone_in_talk_black_24dp};
 
 
-    private static int SIGN_IN_REQUEST_CODE = 1;
 
 
     @Override
@@ -99,53 +80,9 @@ public class MainActivity extends AppCompatActivity {
         activity_main = findViewById(R.id.activity_main);
 
 
-        /*
-        getting refrence for firebase database
-         */
-        mdataBase = FirebaseDatabase.getInstance().getReference();
 
 
 
-        // Choose authentication providers
-//        List<AuthUI.IdpConfig> providers = Arrays.asList(
-//                new AuthUI.IdpConfig.EmailBuilder().build(),
-//                new AuthUI.IdpConfig.PhoneBuilder().build(),
-//                new AuthUI.IdpConfig.GoogleBuilder().build());
-
-        final List<AuthUI.IdpConfig> providers = Arrays.asList(
-                new AuthUI.IdpConfig.EmailBuilder().build());
-
-          /*
-
-        Check if not sign-in then navigate Signing page
-
-        */
-
-
-
-        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-
-            startActivityForResult(
-                    AuthUI.getInstance()
-                            .createSignInIntentBuilder()
-                            .setAvailableProviders(providers)
-                            .build(),
-                    SIGN_IN_REQUEST_CODE);
-
-
-
-
-//            startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().build(), SIGN_IN_REQUEST_CODE);
-
-
-        } else {
-
-            writeUserSignStatus(FirebaseAuth.getInstance().getCurrentUser().getUid(),FirebaseAuth.getInstance().getCurrentUser().getEmail(),"1");
-
-            Snackbar.make(activity_main,"Welcome " + FirebaseAuth.getInstance().getCurrentUser().getEmail(), Snackbar.LENGTH_SHORT).show();
-              //Load content
-             //displayChatMessage();
-        }
 
 
         /*
@@ -205,6 +142,8 @@ public class MainActivity extends AppCompatActivity {
                 switch(position) {
                     case 0:
                         Toast.makeText(MainActivity.this, "You are in chat fragment", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(MainActivity.this,Chating_activity.class);
+                        startActivity(i);
                         break;
                     case 1:
                         Toast.makeText(MainActivity.this, "You are in groups fragment", Toast.LENGTH_SHORT).show();
@@ -360,69 +299,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    /*
-    function to check whether the user is signed in or not to save from multiple login with same account
-     */
 
-    private void writeUserSignStatus(String userId, String email, String status) {
-        UserSignInCheck user = new UserSignInCheck(email, status);
-
-        mdataBase.child("userSignInStatus").child(userId).setValue(user);
-
-    }
-
-    /*
-    intent code
-     */
-
-    @Override
-    protected void onActivityResult(int requestCode, final int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == SIGN_IN_REQUEST_CODE) {
-
-            IdpResponse response = IdpResponse.fromResultIntent(data);
-
-            if (resultCode == RESULT_OK) {
-
-                final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                final DatabaseReference assignedCustomerRef = FirebaseDatabase.getInstance().getReference().child("userSignInStatus").child(userId).child("signInStatus");
-                assignedCustomerRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists()) {
-
-                            System.out.println("Status : "+dataSnapshot.getValue().toString());
-
-                            if (dataSnapshot.getValue().toString().equals("1")){
-
-
-
-                                Toast.makeText(MainActivity.this, "Already Exist", Toast.LENGTH_SHORT).show();
-
-                            }else{
-                                // Create and launch sign-in intent
-                                startActivity(new Intent(getApplicationContext(), AddDetailActivity.class));
-
-                                writeUserSignStatus(FirebaseAuth.getInstance().getCurrentUser().getUid(),FirebaseAuth.getInstance().getCurrentUser().getEmail(),"1");
-
-                            }
-
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
-
-
-            } else {
-
-            }
-
-        }
-    }
 
 
     /*

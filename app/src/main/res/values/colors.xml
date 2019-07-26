@@ -15,4 +15,6 @@
     <color name="app_background_color">#FAFAFA</color>
     <color name="item_selected_background_color">#C7C7CC</color>
     <color name="badge_Color">#97dd5b</color>
+    <color name="view_color">#CCCCCC</color>
+    <color name="red">#f75050</color>
 </resources>

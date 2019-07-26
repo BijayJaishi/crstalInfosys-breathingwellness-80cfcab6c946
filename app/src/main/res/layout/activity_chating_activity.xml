@@ -5,27 +5,25 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activities.Chating_activity">
 
 
 
-   <android.support.v7.widget.RecyclerView
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:id="@+id/recycleViewChat">
-   </android.support.v7.widget.RecyclerView>
 
-   <!-- <ImageView
-        android:id="@+id/emoji_button"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        android:src="@drawable/smiley"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_width="40dp"
-        android:layout_height="40dp" />
 
     <ImageView
+    android:background="@drawable/btn1"
+    android:id="@+id/emoji_button"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
+    android:src="@drawable/smiley"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentBottom="true"
+    android:layout_width="40dp"
+    android:layout_height="40dp" />
+
+    <ImageView
+        android:background="@drawable/sendbutton_view"
         android:id="@+id/submit_button"
         android:padding="4dp"
         android:src="@android:drawable/ic_menu_send"
@@ -36,28 +34,37 @@
 
 
     <hani.momanii.supernova_emoji_library.Helper.EmojiconEditText
+
+        android:background="@drawable/chat_line"
         android:id="@+id/emojicon_edit_text"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/load_image"
         android:layout_toLeftOf="@+id/submit_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:fontFamily="@font/aclonica"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:textSize="16sp"
         app:emojiconSize="28sp"
         />
 
     <ImageView
+        android:background="@drawable/btn1"
         android:id="@+id/load_image"
         android:paddingTop="4dp"
         android:paddingBottom="4dp"
-        android:paddingRight="4dp"
+        android:layout_marginLeft="2dp"
         android:src="@drawable/ic_image_black_24dp"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/emoji_button"
         android:layout_width="40dp"
-        android:layout_height="40dp" />
+        android:layout_height="40dp"
+        />
 
 
-    <ListView
+
+    <android.support.v7.widget.RecyclerView
         android:scrollbarThumbVertical="@android:color/transparent"
         android:id="@+id/list_of_message"
         android:layout_alignParentTop="true"
@@ -68,9 +75,10 @@
         android:layout_height="match_parent"
         android:stackFromBottom="true"
         android:transcriptMode="alwaysScroll"
+        android:layout_marginBottom="5dp"
         android:layout_alignParentLeft="true">
 
-    </ListView>-->
+    </android.support.v7.widget.RecyclerView>
 
 
 
